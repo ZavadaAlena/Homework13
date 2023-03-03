@@ -15,13 +15,13 @@ import java.util.List;
 
 public class Task3 {
     public static void main(String[] args) throws IOException, InterruptedException {
-        openedTasks();
+        openedTasks(1);
     }
 
-    public static void openedTasks() throws IOException, InterruptedException {
+    public static void openedTasks(int userId) throws IOException, InterruptedException {
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://jsonplaceholder.typicode.com/users/1/todos"))
+                .uri(URI.create(String.format("https://jsonplaceholder.typicode.com/users/%d/todos",userId)))
                 .header("Content-Type", "application/json")
                 .GET()
                 .build();

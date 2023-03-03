@@ -12,29 +12,31 @@ import java.net.http.HttpResponse;
 
 public class Task2 {
     public static void main(String[] args) throws IOException, InterruptedException {
-        inputtingTheComments();
+        inputtingTheComments(1);
     }
-    public static FileWriter createACorrectNameOfTheFile() throws IOException, InterruptedException {
+    public static UserForTask2Json getUserForTask2Json(int userId) throws IOException, InterruptedException {
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://jsonplaceholder.typicode.com/users/1/posts"))
+                .uri(URI.create(String.format("https://jsonplaceholder.typicode.com/users/%d/posts", userId)))
                 .header("Content-Type", "application/json")
                 .GET()
                 .build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         JsonArray array = new Gson().fromJson(response.body(), JsonArray.class);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-        UserForTask2Json fromJson = gson.fromJson(array.get(array.size() - 1), UserForTask2Json.class);
-        return new FileWriter("user-" + fromJson.getUserId() + "-post-" + fromJson.getId() + "-comments.json");
+        return gson.fromJson(array.get(array.size() - 1), UserForTask2Json.class);
     }
 
-    public static void inputtingTheComments() throws IOException, InterruptedException {
-        FileWriter writer = createACorrectNameOfTheFile();
+    public static void inputtingTheComments(int userId) throws IOException, InterruptedException {
+        UserForTask2Json fromJson = getUserForTask2Json(userId);
+
+        FileWriter writer = new FileWriter(String.format("user-%d-post-%d-comments.json",
+                fromJson.getUserId(), fromJson.getId()));
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpRequest request1 = HttpRequest.newBuilder()
-                .uri(URI.create("https://jsonplaceholder.typicode.com/posts/10/comments"))
+                .uri(URI.create(String.format("https://jsonplaceholder.typicode.com/posts/%d/comments",
+                        fromJson.getId())))
                 .header("Content-Type", "application/json")
                 .GET()
                 .build();
