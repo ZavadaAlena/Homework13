@@ -1,4 +1,5 @@
 package Task2;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -14,6 +15,7 @@ public class Task2 {
     public static void main(String[] args) throws IOException, InterruptedException {
         inputtingTheComments(1);
     }
+
     public static UserForTask2Json getUserForTask2Json(int userId) throws IOException, InterruptedException {
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()

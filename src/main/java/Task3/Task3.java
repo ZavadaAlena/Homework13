@@ -21,7 +21,7 @@ public class Task3 {
     public static void openedTasks(int userId) throws IOException, InterruptedException {
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(String.format("https://jsonplaceholder.typicode.com/users/%d/todos",userId)))
+                .uri(URI.create(String.format("https://jsonplaceholder.typicode.com/users/%d/todos", userId)))
                 .header("Content-Type", "application/json")
                 .GET()
                 .build();
