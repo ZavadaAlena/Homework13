@@ -14,11 +14,11 @@ import java.net.http.HttpResponse;
 
 public class UserMethod {
     public static void main(String[] args) throws IOException, InterruptedException {
-        User user1 = new User("Evgenii Zavada", "Commando", "zavada1997@gmail.com",
+        User user1 = new User(0,"Evgenii Zavada", "Commando", "zavada1997@gmail.com",
                 "street: Admon 6" + "," + " " + "city: Katsrin", +38058888888L, "commando.com",
                 "Tavtek");
 
-        User user2 = new User("Ira Garmash", "Monkey", "irina@gmail.com",
+        User user2 = new User(1,"Ira Garmash", "Monkey", "irina@gmail.com",
                 "street: Dobrolubova 84" + "," + " " + "city: Nicopol", +380993568555L,
                 "Cats", "cats.com");
 
@@ -63,7 +63,7 @@ public class UserMethod {
     public static User updatingOFUser(User user) throws IOException, InterruptedException {
         String jsonUser = new Gson().toJson(user);
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://jsonplaceholder.typicode.com/users/2"))
+                .uri(URI.create("https://jsonplaceholder.typicode.com/users/" + user.getId()))
                 .header("Content-Type", "application/json")
                 .PUT(HttpRequest.BodyPublishers.ofString(jsonUser))
                 .build();

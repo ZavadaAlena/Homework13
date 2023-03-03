@@ -31,7 +31,7 @@ public class Task3 {
         List<UserForTask3Json> users = new ArrayList<>();
         for (JsonElement element : array) {
             UserForTask3Json user = gson.fromJson(element, UserForTask3Json.class);
-            if (user.getCompleted().equals("false")) {
+            if (!user.isCompleted()) {
                 users.add(user);
             }
         }

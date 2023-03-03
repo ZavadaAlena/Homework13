@@ -13,8 +13,8 @@ public class User {
     private String website;
     private String company;
 
-    public User( String name, String username, String email, String address, Long phone, String website, String company) {
-
+    public User( int id, String name, String username, String email, String address, Long phone, String website, String company) {
+this.id =id;
         this.name = name;
         this.username = username;
         this.email = email;

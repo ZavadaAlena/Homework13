@@ -4,7 +4,7 @@ public class UserForTask3Json {
     private int userId;
     private int id;
     private String title;
-    private String completed;
+    private boolean completed;
 
     @Override
     public String toString() {
@@ -40,14 +40,12 @@ public class UserForTask3Json {
         this.title = title;
     }
 
-    public String getCompleted() {
+    public boolean isCompleted() {
         return completed;
     }
 
-    public void setCompleted(String completed) {
+    public void setCompleted(boolean completed) {
         this.completed = completed;
     }
-
-
 }
 
